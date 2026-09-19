@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="media-base" content="../media/photos">
+    <title>Di tích trường tư thục Bình Hoà - Giồng Trôm, Bến Tre</title>
+
+        <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <main class="page">
+        <!-- Header Row containing title (left) and tabs (right) -->
+        <header class="header-row">
+            <div class="header" style="display:flex; justify-content:center; align-items:center; width:100%;">
+                <img src="png/title.png" alt="Di tích trường tư thục Bình Hoà" class="title-image" style="display:block; max-height:72px; width:auto; margin-top:4px;">
+            </div>
+
+            <!-- Category Tabs Selector -->
+            <nav class="tabs-container" aria-label="Bộ lọc phương tiện">
+                <div class="tabs">
+                    <button class="tab-btn active" data-category="all">Tất cả</button>
+                    <button class="tab-btn" data-category="object">Hiện vật</button>
+                    <button class="tab-btn" data-category="event">Sự kiện</button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Trình xem media cao cấp -->
+        <section class="viewer-panel" aria-label="Trình xem đa phương tiện">
+            <div class="player-container" id="playerContainer">
+                <div class="player-loader" id="playerLoader"></div>
+
+                <!-- Media Display Area -->
+                <div id="player"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; overflow: hidden;">
+                </div>
+
+                <!-- Floating Navigation Arrows inside player-container -->
+                <button class="player-nav-btn prev" id="playerPrevBtn" title="Media trước" aria-label="Media trước">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                <button class="player-nav-btn next" id="playerNextBtn" title="Media sau" aria-label="Media sau">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+
+                <!-- Custom YouTube Style Video Controls -->
+                <div class="video-controls" id="videoControls">
+                    <div class="video-progress-container" id="videoProgressContainer">
+                        <div class="video-progress-bg">
+                            <div class="video-progress-loaded" id="videoProgressLoaded"></div>
+                            <div class="video-progress-current" id="videoProgressCurrent"></div>
+                        </div>
+                        <div class="video-progress-knob" id="videoProgressKnob"></div>
+                    </div>
+                    <div class="controls-row">
+                        <div class="controls-left">
+                            <!-- Synchronized play/pause button -->
+                            <button class="btn-circle" id="videoPlayBtn" aria-label="Phát/Tạm dừng">
+                                <!-- Play Icon -->
+                                <svg class="icon-play" viewBox="0 0 24 24" id="svgPlay">
+                                    <path d="M8 5v14l11-7z" />
+                                </svg>
+                                <!-- Pause Icon -->
+                                <svg class="icon-pause" viewBox="0 0 24 24" id="svgPause" style="display:none;">
+                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                                </svg>
+                            </button>
+
+                            <!-- Synchronized unified volume block -->
+                            <div class="volume-group" id="volumeGroup">
+                                <button class="volume-btn" id="videoVolumeBtn" aria-label="Âm thanh"
+                                    style="background: none; border: none; width: 36px; height: 36px; display: grid; place-items: center; color: #fff;">
+                                    <!-- Volume High -->
+                                    <svg class="icon-volume-high" id="svgVolHigh" viewBox="0 0 24 24"
+                                        style="width: 22px; height: 22px; fill: currentColor;">
+                                        <path
+                                            d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z" />
+                                    </svg>
+                                    <!-- Volume Muted -->
+                                    <svg class="icon-volume-mute" id="svgVolMute" viewBox="0 0 24 24"
+                                        style="width: 22px; height: 22px; fill: currentColor; display:none;">
+                                        <path
+                                            d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z" />
+                                    </svg>
+                                </button>
+                                <div class="volume-slider-container">
+                                    <input type="range" class="volume-slider" id="videoVolumeSlider" min="0" max="1"
+                                        step="0.05" value="1">
+                                </div>
+                            </div>
+
+                            <!-- Synchronized capsule time display -->
+                            <div class="video-time" id="videoTime">0:00 / 0:00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Caption Overlay at Top Right (Fullscreen) -->
+                <div class="player-caption">
+                    <div class="caption-controls">
+                        <!-- Fullscreen Toggle (Circular translucent button) -->
+                        <button class="btn-circle" id="fullscreenBtn" title="Chế độ rạp chiếu (F)"
+                            aria-label="Toàn màn hình">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Floating Index Badge at Bottom Right -->
+                <div class="player-index" id="playerIndex">0 / 0</div>
+            </div>
+
+            <!--Note Media Content at Bottom-->
+            <div class="note-media" id="noteMedia">
+                <p class="note-media__content" data-content="Nội dung media.">
+                </p>
+            </div>
+
+            <!-- Thumbnails Carousel Control -->
+            <div class="thumb-row-wrap is-expanded" id="thumbRowWrap">
+                <button class="nav-btn" type="button" id="prevButton" title="Media trước" aria-label="Media trước">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+
+                <div class="thumb-row" id="thumbRow" aria-label="Danh sách ảnh thu nhỏ"></div>
+
+                <button class="nav-btn" type="button" id="nextButton" title="Media sau" aria-label="Media sau">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <footer class="footer" style="display: none;"></footer>
+    </main>
+
+        <script src="js/script.js"></script>
+</body>
+
+</html>
