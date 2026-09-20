@@ -510,6 +510,43 @@
             renderPlayer();
         }
 
+        function setupSwipeNavigation() {
+            let touchStartX = 0;
+            let touchStartY = 0;
+            let touchStartTime = 0;
+
+            playerContainer.addEventListener('touchstart', (event) => {
+                if (event.touches.length !== 1) return;
+                const touch = event.touches[0];
+                touchStartX = touch.clientX;
+                touchStartY = touch.clientY;
+                touchStartTime = Date.now();
+            }, { passive: true });
+
+            playerContainer.addEventListener('touchend', (event) => {
+                if (!event.changedTouches || event.changedTouches.length === 0) return;
+                const touch = event.changedTouches[0];
+                const deltaX = touch.clientX - touchStartX;
+                const deltaY = touch.clientY - touchStartY;
+                const elapsed = Date.now() - touchStartTime;
+
+                if (window.innerWidth > 768) return;
+                if (Math.abs(deltaX) < 60 || Math.abs(deltaX) < Math.abs(deltaY) || elapsed > 800) {
+                    return;
+                }
+
+                if (deltaX < 0) {
+                    expandThumbBar();
+                    moveSelection(1);
+                    scheduleThumbBarCollapse();
+                } else {
+                    expandThumbBar();
+                    moveSelection(-1);
+                    scheduleThumbBarCollapse();
+                }
+            }, { passive: true });
+        }
+
         // Category Tabs Logic
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -618,6 +655,7 @@
 
         // Setup custom controls on startup
         setupVideoControls();
+        setupSwipeNavigation();
 
         // Initial load
         renderThumbs();

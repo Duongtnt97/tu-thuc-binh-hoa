@@ -105,6 +105,8 @@
             display: block;
             max-height: 72px;
             width: auto;
+            height: auto;
+            object-fit: contain;
             margin-top: 4px;
         }
 
@@ -880,6 +882,17 @@
             .header {
                 flex: 0 0 auto;
                 text-align: left;
+            }
+
+            .title-image {
+                display: block;
+                width: min(100%, 280px) !important;
+                max-width: 100% !important;
+                max-height: clamp(28px, 6vw, 46px) !important;
+                height: auto !important;
+                object-fit: contain !important;
+                margin-top: 2px !important;
+                flex-shrink: 1;
             }
 
             .header-tag {
