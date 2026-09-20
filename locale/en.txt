@@ -4,7 +4,7 @@
 
 ### URL
 PopupWebFrameBehaviour_6D43B01F_758B_4CD9_41DD_0DF026FE5F33.url = .\web\legacy\index.html
-PopupWebFrameBehaviour_5A6B75E2_75BD_576B_41B5_A32016B8F7C3.url = http://onenote.vn/nha-ong-muoi-trac/album/site/
+PopupWebFrameBehaviour_5A6B75E2_75BD_576B_41B5_A32016B8F7C3.url = .\web\legacy\index.html
 
 ## Hotspot
 
